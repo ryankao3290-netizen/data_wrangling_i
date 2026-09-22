@@ -1,0 +1,96 @@
+---
+title: "data import"
+output: github_document
+---
+This file is for data import
+```{r}
+library(tidyverse)
+```
+```{r}
+getwd()
+
+```
+
+```{r}
+litters_df = read_csv(file = "./data/FAS_litters.csv")
+
+names(litters_df)
+
+litters_df = janitor::clean_names(litters_df)
+names(litters_df)
+
+litters_df
+tail(litters_df, 5)
+
+skimr::skim(litters_df)
+
+view(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+    skip = 10, col_names = FALSE)
+
+head(litters_df)
+
+litters_df = 
+    read_csv(
+        file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""))
+
+head(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_character(),
+      `Litter Number` = col_character(),
+      `GD0 weight` = col_double(),
+      `GD18 weight` = col_double(),
+      `GD of Birth` = col_integer(),
+      `Pups born alive` = col_integer(),
+      `Pups dead @ birth` = col_integer(),
+      `Pups survive` = col_integer()
+    )
+  )
+
+tail(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_factor()
+    )
+)
+
+head(litters_df)
+```
+
+
+```{r}
+library(readxl)
+
+mlb11_df = read_excel("data/mlb11.xlsx", n_max = 20)
+
+head(mlb11_df, 5)
+
+library(haven)
+
+pulse_df = read_sas("./data/public_pulse_data.sas7bdat")
+
+head(pulse_df, 5)
+
+pups_base = read.csv("./data/FAS_pups.csv", skip = 3)
+pups_readr = read_csv("./data/FAS_pups.csv", skip = 3)
+
+View(pups_base)
+View(pups_readr)
+
+pups_base
+pups_readr
+
+pups_base$S
+pups_readr$S
+```
+
